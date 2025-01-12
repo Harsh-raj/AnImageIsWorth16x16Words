@@ -1,4 +1,4 @@
-from hyperparameters import num_classes, num_encoders, latent_size, device, base_lr, weight_decay, model, epochs
+from hyperparameters import num_classes, num_encoders, latent_size, device, base_lr, weight_decay, epochs
 from prepareDataset import PrepareDataset
 from tqdm import tqdm
 from torch import nn
