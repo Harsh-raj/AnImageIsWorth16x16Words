@@ -1,4 +1,4 @@
-from torchvision.transform import Compose, RandomCrop, Resize, RandomHorizontalFlip, ToTensor, Normalize
+from torchvision.transforms import Compose, RandomCrop, Resize, RandomHorizontalFlip, ToTensor, Normalize
 
 import torchvision
 import torch
