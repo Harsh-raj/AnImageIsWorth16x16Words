@@ -11,25 +11,9 @@ from torchvision.transforms import Compose, Resize, ToTensor, Normalize, RandomH
 
 from inputEmbedding import InputEmbedding
 from encoderBlock import EncoderBlock
+from hyperparameters import num_classes, num_encoders, latent_size, device, dropout
   
 class Vit(nn.Module):
-
-  device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
-  print(device)
-
-  patch_size = 16
-  latent_size = 768
-  n_channels = 3
-  num_heads = 12
-  num_encoders = 12
-  dropout = 0.1
-  num_classes = 10
-  size = 224
-
-  epochs = 10
-  base_lr = 10e-3
-  weight_decay = 0.03
-  batch_size = 4
   
   def __init__(self, num_encoders=num_encoders, latent_size=latent_size, device=device, num_classes=num_classes, dropout=dropout):
     super(Vit, self).__init__()

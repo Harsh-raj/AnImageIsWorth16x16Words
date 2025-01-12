@@ -1,9 +1,10 @@
 from torch import nn
+import torch
 import einops
-from vit import Vit
+from hyperparameters import patch_size, n_channels, device, latent_size, batch_size
 
 class InputEmbedding(nn.Module):
-  def __init__(self, patch_size = Vit.patch_size, n_channels=Vit.n_channels, device=Vit.device, latent_size=Vit.latent_size, batch_size=Vit.batch_size):
+  def __init__(self, patch_size = patch_size, n_channels=n_channels, device=device, latent_size=latent_size, batch_size=batch_size):
     super(InputEmbedding, self).__init__()
     self.latent_size = latent_size
     self.patch_size = patch_size

@@ -1,4 +1,4 @@
-from vit import Vit
+from hyperparameters import num_classes, num_encoders, latent_size, device, base_lr, weight_decay, model, epochs
 from prepareDataset import PrepareDataset
 from tqdm import tqdm
 from torch import nn
@@ -6,25 +6,25 @@ import torch.optim as optim
 from torchsummary import summary
 
 class Train:
-  model = Vit(Vit.num_encoders, Vit.latent_size, Vit.device, Vit.num_classes).to(Vit.device)
+  model = Vit(num_encoders, latent_size, device, num_classes).to(device)
   
   # Betas used for Adam in paper are 0.9 and 0.999
-  optimizer = optim.Adam(model.parameters(), lr=Vit.base_lr, weight_decay=Vit.weight_decay)
+  optimizer = optim.Adam(model.parameters(), lr=base_lr, weight_decay=weight_decay)
   criterion = nn.CrossEntropyLoss()
   scheduler = optim.lr_scheduler.LinearLR(optimizer)
   
   @staticmethod
   def train():
-    Vit.model.train().to(Vit.device)
+    model.train().to(device)
     
-    for epoch in tqdm(range(Vit.epochs), total=Vit.epochs):
+    for epoch in tqdm(range(epochs), total=epochs):
       running_loss = 0.0
       for batch_idx, (inputs, targets) in enumerate(tqdm(PrepareDataset.trainloader)):
-        inputs, targets = inputs.to(Vit.device), targets.to(Vit.device)
+        inputs, targets = inputs.to(device), targets.to(device)
         
         optimizer.zero_grad()
         
-        outputs = Vit.model(inputs)
+        outputs = model(inputs)
         
         loss = criterion(outputs, targets)
         
@@ -38,7 +38,7 @@ class Train:
           running_loss = 0
       
     scheduler.step()
-    summary(Vit.model)
+    summary(model)
       
 if __name__ == "__main__":
   Train.train()

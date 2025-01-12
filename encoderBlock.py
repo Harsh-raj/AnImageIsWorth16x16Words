@@ -1,9 +1,9 @@
 from torch import nn
 import torch
-from vit import Vit
+from hyperparameters import latent_size, num_heads, device, dropout
 
 class EncoderBlock(nn.Module):
-  def __init__(self, latent_size=Vit.latent_size, num_heads=Vit.num_heads, device=Vit.device, dropout=Vit.dropout):
+  def __init__(self, latent_size=latent_size, num_heads=num_heads, device=device, dropout=dropout):
     super(EncoderBlock, self).__init__()
     
     self.latent_size = latent_size
