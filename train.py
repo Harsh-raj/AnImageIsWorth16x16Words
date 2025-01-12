@@ -16,7 +16,7 @@ class Train:
   
   @staticmethod
   def train():
-    model.train().to(device)
+    Train.model.train().to(device)
     
     for epoch in tqdm(range(epochs), total=epochs):
       running_loss = 0.0
