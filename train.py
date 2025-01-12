@@ -4,6 +4,7 @@ from tqdm import tqdm
 from torch import nn
 import torch.optim as optim
 from torchsummary import summary
+from vit import Vit
 
 class Train:
   model = Vit(num_encoders, latent_size, device, num_classes).to(device)
