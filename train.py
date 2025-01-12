@@ -3,6 +3,7 @@ from prepareDataset import PrepareDataset
 from tqdm import tqdm
 from torch import nn
 import torch.optim as optim
+from torchsummary import summary
 
 class Train:
   model = Vit(Vit.num_encoders, Vit.latent_size, Vit.device, Vit.num_classes).to(Vit.device)
@@ -36,7 +37,8 @@ class Train:
           print('Batch {} epoch {} has loss = {}'.format(batch_idx, epoch, running_loss/200))
           running_loss = 0
       
-    scheduler.step
+    scheduler.step()
+    summary(Vit.model)
       
 if __name__ == "__main__":
   Train.train()
