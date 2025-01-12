@@ -23,14 +23,14 @@ class Train:
       for batch_idx, (inputs, targets) in enumerate(tqdm(PrepareDataset.trainloader)):
         inputs, targets = inputs.to(device), targets.to(device)
         
-        optimizer.zero_grad()
+        Train.optimizer.zero_grad()
         
-        outputs = model(inputs)
+        outputs = Train.model(inputs)
         
-        loss = criterion(outputs, targets)
+        loss = Train.criterion(outputs, targets)
         
         loss.backward()
-        optimizer.step()
+        Train.optimizer.step()
         
         running_loss += loss.item()
         
@@ -38,8 +38,8 @@ class Train:
           print('Batch {} epoch {} has loss = {}'.format(batch_idx, epoch, running_loss/200))
           running_loss = 0
       
-    scheduler.step()
-    summary(model)
+    Train.scheduler.step()
+    summary(Train.model)
       
 if __name__ == "__main__":
   Train.train()
